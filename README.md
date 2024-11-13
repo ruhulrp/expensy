@@ -1,1 +1,1 @@
-A simple CLI daily expense tracker written in Golang.
+A simple CLI based daily expense tracker written in Golang.
