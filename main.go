@@ -12,7 +12,7 @@ func main() {
 	var choice int
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("What do you want? 1. ADD New Expense, 2. Update Expense, 3. Delete Expense, 4. Get a Report")
+	fmt.Println("What do you want?\n1. ADD New Expense\n2. Update Expense\n3. Delete Expense\n4. Get a Report")
 	fmt.Scan(&choice)
 
 	switch {
@@ -42,7 +42,7 @@ func main() {
 	case choice == 4:
 
 		fmt.Println("Here is your Report!")
-		fmt.Println(readExpense("expense.json"))
+		expensesReport()
 	}
 
 }

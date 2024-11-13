@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
+	"github.com/olekukonko/tablewriter"
 )
 
 // The information that should be input for every Expense
@@ -28,8 +30,9 @@ func (exp Expense) addExpense() string {
 
 	if !fileExist(filename) {
 		writeExpense(expenses, filename)
+	} else {
+		appendExpense(filename, expense)
 	}
-	appendExpense(filename, expense)
 
 	return "You successfully added an expense!\n"
 
@@ -100,6 +103,32 @@ func appendExpense(filename string, newExpense Expense) error {
 	}
 
 	return nil
+}
+
+func expensesReport() {
+	exp, _ := readExpense("expense.json")
+
+	var data [][]string
+
+	for _, d := range exp {
+
+		dat := []string{fmt.Sprintf("%d", d.ID), d.Date, d.Category, d.Item, fmt.Sprintf("%.2f", d.Price), d.Description}
+
+		data = append(data, dat)
+	}
+
+	x := []string{"ID", "Date", "Category", "Item", "Price", "Description"}
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader(x)
+
+	for _, row := range data[0:] {
+
+		table.Append(row)
+	}
+
+	table.Render()
+
 }
 
 func fileExist(filename string) bool {
