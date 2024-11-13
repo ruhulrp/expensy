@@ -81,8 +81,6 @@ func writeExpense(expenses []Expense, filename string) error {
 		return err
 	}
 
-	fmt.Println("this is create")
-
 	return nil
 }
 
