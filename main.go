@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	var expense Expense
+	var add_expense Expense
 	var choice int
 	reader := bufio.NewReader(os.Stdin)
 
@@ -16,45 +16,55 @@ func main() {
 	fmt.Scan(&choice)
 
 	switch {
-	case choice == 1:
+	case choice == 1: // ADD New Expense
+
 		fmt.Println("Give an ID: ")
-		fmt.Scan(&expense.ID)
+		fmt.Scan(&add_expense.ID)
+
 		fmt.Println("Give a Date: ")
-		fmt.Scan(&expense.Date)
+		fmt.Scan(&add_expense.Date)
+
 		fmt.Println("Give a Category: ")
 		category, _ := reader.ReadString('\n')
-		expense.Category = category
+		add_expense.Category = category
+
 		fmt.Println("Give an Item: ")
 		item, _ := reader.ReadString('\n')
-		expense.Item = item
+		add_expense.Item = item
+
 		fmt.Println("Give a Price: ")
-		fmt.Scan(&expense.Price)
+		fmt.Scan(&add_expense.Price)
+
 		fmt.Println("Give a Description: ")
 		descripton, _ := reader.ReadString('\n')
-		expense.Description = descripton
+		add_expense.Description = descripton
 
-		fmt.Print(expense.addExpense())
+		fmt.Print(addExpense(add_expense))
 
-	case choice == 2:
+	case choice == 2: // Update an Expense
 
-		var n int
+		var expense_id_to_update int
 
 		fmt.Println("Give an ID: ")
-		fmt.Scan(&n)
+		fmt.Scan(&expense_id_to_update)
 
-		saveUpdatedInfo(n)
+		saveUpdatedInfo(expense_id_to_update)
 
 		fmt.Println("You successfully updated an expense!")
-	case choice == 3:
-		var n int
+
+	case choice == 3: // Delete an Expense
+
+		var expense_id_to_delete int
 
 		fmt.Println("Give an ID: ")
-		fmt.Scan(&n)
+		fmt.Scan(&expense_id_to_delete)
 
-		deleteExpense(n)
+		deleteExpense(expense_id_to_delete)
 
 		fmt.Println("You successfully deleted an expense!")
-	case choice == 4:
+
+	case choice == 4: // Generate a Report
+
 		fmt.Println("Here is your Report:")
 		expensesReport()
 	}
